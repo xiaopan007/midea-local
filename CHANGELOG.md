@@ -1,5 +1,33 @@
 # Changelog
 
+## [8.0.0](https://github.com/xiaopan007/midea-local/compare/midea-local-v7.0.0...midea-local-v8.0.0) (2026-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ac:** rename subtype8 temperature names to new_protocol ([#605](https://github.com/xiaopan007/midea-local/issues/605))
+* **c3:** normalize silent_level attribute naming ([#620](https://github.com/xiaopan007/midea-local/issues/620))
+* **b8:** rename B8DeviceAttributes for consistency ([#615](https://github.com/xiaopan007/midea-local/issues/615))
+
+### Bug Fixes
+
+* **b6:** turn_on evaluation ([#613](https://github.com/xiaopan007/midea-local/issues/613)) ([14ecf24](https://github.com/xiaopan007/midea-local/commit/14ecf246deb779f21a4be72c4e52a2157a49cebd))
+* **ca:** transmit translated values ([#611](https://github.com/xiaopan007/midea-local/issues/611)) ([4a387ed](https://github.com/xiaopan007/midea-local/commit/4a387ed248eb589e62fc26ceea2c9253ae44aa99))
+* **cf:** attribute values validation ([#612](https://github.com/xiaopan007/midea-local/issues/612)) ([f41758c](https://github.com/xiaopan007/midea-local/commit/f41758c9ec11da0cb45c61d411c5804bdcd62fd5))
+* **ci:** avoid PR title script injection ([#1](https://github.com/xiaopan007/midea-local/issues/1)) ([998d2ca](https://github.com/xiaopan007/midea-local/commit/998d2cae7d9d3387ce25159cc6185ed16c0124bd))
+* **ci:** handle optional workflow secrets ([#2](https://github.com/xiaopan007/midea-local/issues/2)) ([2ffc6b5](https://github.com/xiaopan007/midea-local/commit/2ffc6b5aa65c634781a59b968efd8cbe46b919e8))
+* **cli:** namespace guard to get_sn attr ([#627](https://github.com/xiaopan007/midea-local/issues/627)) ([cb87bf4](https://github.com/xiaopan007/midea-local/commit/cb87bf4bc4ecf9550fd0e6857cb95f46dbc771fa))
+* **e2:** encode subtype 255 temperature literally ([#621](https://github.com/xiaopan007/midea-local/issues/621)) ([f87b89d](https://github.com/xiaopan007/midea-local/commit/f87b89dc9fd1fbe8a51f4e1c26a2ba5496f6421b))
+* **fa:** turn_on evaluation ([#614](https://github.com/xiaopan007/midea-local/issues/614)) ([61c3ee6](https://github.com/xiaopan007/midea-local/commit/61c3ee6bffda8eca4c26a540e25514864cac7aaa))
+* included typing_extensions to requirements ([#604](https://github.com/xiaopan007/midea-local/issues/604)) ([35ec51e](https://github.com/xiaopan007/midea-local/commit/35ec51ebe59d86106038d8d006a5ae4f4445e191))
+
+
+### Code Refactoring
+
+* **ac:** rename subtype8 temperature names to new_protocol ([#605](https://github.com/xiaopan007/midea-local/issues/605)) ([4e7edd8](https://github.com/xiaopan007/midea-local/commit/4e7edd81c25ff9f2961e896406b78960b5ecf2bd))
+* **b8:** rename B8DeviceAttributes for consistency ([#615](https://github.com/xiaopan007/midea-local/issues/615)) ([69889e1](https://github.com/xiaopan007/midea-local/commit/69889e1168d34b4184272634679daea125ca6947))
+* **c3:** normalize silent_level attribute naming ([#620](https://github.com/xiaopan007/midea-local/issues/620)) ([049f750](https://github.com/xiaopan007/midea-local/commit/049f750b584424da0de11132afc102f94e9296ed))
+
 ## [7.0.0](https://github.com/midea-lan/midea-local/compare/midea-local-v6.11.1...midea-local-v7.0.0) (2026-08-05)
 
 
