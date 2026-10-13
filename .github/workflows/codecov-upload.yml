@@ -29,6 +29,8 @@ jobs:
   upload:
     name: Upload Coverage to Codecov
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       # workflow_run jobs don't automatically show up as a check on the PR - GitHub
       # attaches their check-run to the workflow's own trigger ref (the base branch),
@@ -56,13 +58,13 @@ jobs:
       # risk). We don't need the PR's tree anyway - nothing in this job executes
       # code from it, this just gives codecov-action a git repo to work from.
       - name: Checkout base branch
-        if: github.event.workflow_run.conclusion == 'success'
+        if: github.event.workflow_run.conclusion == 'success' && env.CODECOV_TOKEN != ''
         uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       - name: Download coverage artifact
-        if: github.event.workflow_run.conclusion == 'success'
+        if: github.event.workflow_run.conclusion == 'success' && env.CODECOV_TOKEN != ''
         uses: actions/download-artifact@v8
         with:
           name: coverage-report
@@ -70,7 +72,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Resolve PR number for this commit
-        if: github.event.workflow_run.conclusion == 'success'
+        if: github.event.workflow_run.conclusion == 'success' && env.CODECOV_TOKEN != ''
         id: pr
         run: |
           number=$(gh api "repos/${{ github.repository }}/commits/${{ github.event.workflow_run.head_sha }}/pulls" \
@@ -80,11 +82,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload coverage reports to Codecov
-        if: github.event.workflow_run.conclusion == 'success'
+        if: github.event.workflow_run.conclusion == 'success' && env.CODECOV_TOKEN != ''
         id: codecov
         uses: codecov/codecov-action@v7
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ env.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
           override_commit: ${{ github.event.workflow_run.head_sha }}
@@ -100,11 +102,12 @@ jobs:
         env:
           CHECK_ID: ${{ steps.create_check.outputs.check_id }}
           OUTCOME: ${{ steps.codecov.outcome }}
+          TOKEN_AVAILABLE: ${{ env.CODECOV_TOKEN != '' }}
           TRIGGER_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
         with:
           script: |
             let conclusion;
-            if (process.env.TRIGGER_CONCLUSION !== 'success') {
+            if (process.env.TRIGGER_CONCLUSION !== 'success' || process.env.TOKEN_AVAILABLE !== 'true') {
               conclusion = 'skipped';
             } else {
               conclusion = process.env.OUTCOME === 'success' ? 'success' : 'failure';
